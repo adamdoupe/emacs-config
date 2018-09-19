@@ -90,12 +90,12 @@
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
 
 ; scala stuff
-(when (or adam-is-linux adam-is-mac)
-  (add-to-list 'load-path "~/.emacs.d/scala-emacs")
-  (require 'scala-mode-auto)
-  (add-to-list 'load-path "~/.emacs.d/ensime_2.9.2-0.9.8.1/elisp")
-  (require 'ensime)
-  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
+;; (when (or adam-is-linux adam-is-mac)
+;;   (add-to-list 'load-path "~/.emacs.d/scala-emacs")
+;;   (require 'scala-mode-auto)
+;;   (add-to-list 'load-path "~/.emacs.d/ensime_2.9.2-0.9.8.1/elisp")
+;;   (require 'ensime)
+;;   (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
 
 ; add pointer to path to java
 (when adam-is-linux
@@ -111,48 +111,48 @@
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
 ; slime stuff
-(when (or adam-is-linux adam-is-mac)
-  (add-to-list 'load-path "~/.emacs.d/slime/")
-  (add-to-list 'load-path "~/.emacs.d/slime/contrib")
+;; (when (or adam-is-linux adam-is-mac)
+;;   (add-to-list 'load-path "~/.emacs.d/slime/")
+;;   (add-to-list 'load-path "~/.emacs.d/slime/contrib")
   
-  ;; need to set the environment variables on Mac OSX
-  (when adam-is-mac
-    (setenv "CLOJURE_EXT" "/Users/adamd/.clojure"))
+;;   ;; need to set the environment variables on Mac OSX
+;;   (when adam-is-mac
+;;     (setenv "CLOJURE_EXT" "/Users/adamd/.clojure"))
 
 
-  (require 'slime-autoloads)
+;;   (require 'slime-autoloads)
 
-  (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
-  (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-  (slime-setup '(slime-repl))
+;;   (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+;;   (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+;;   (slime-setup '(slime-repl))
 
-  (setq slime-lisp-implementations
-	'((sbcl ("sbcl"))
-	  (clisp ("clisp"))
-	  (clojure ("~/bin/clojure-contrib/launchers/bash/clj-env-dir"))))
+;;   (setq slime-lisp-implementations
+;; 	'((sbcl ("sbcl"))
+;; 	  (clisp ("clisp"))
+;; 	  (clojure ("~/bin/clojure-contrib/launchers/bash/clj-env-dir"))))
 
-  (defmacro defslime-start (name mapping)
-    `(defun ,name ()
-       (interactive)
-       (let ((slime-default-lisp ,mapping))
-	 (slime))))
+;;   (defmacro defslime-start (name mapping)
+;;     `(defun ,name ()
+;;        (interactive)
+;;        (let ((slime-default-lisp ,mapping))
+;; 	 (slime))))
 
-  (defslime-start sbcl 'sbcl)
-  (defslime-start clojure 'clojure)
-  (defslime-start clisp 'clisp)
+;;   (defslime-start sbcl 'sbcl)
+;;   (defslime-start clojure 'clojure)
+;;   (defslime-start clisp 'clisp)
 
-  (add-to-list 'load-path "~/.emacs.d/clojure-mode/")
-  (add-to-list 'load-path "~/.emacs.d/swank-clojure/")
+;;   (add-to-list 'load-path "~/.emacs.d/clojure-mode/")
+;;   (add-to-list 'load-path "~/.emacs.d/swank-clojure/")
 
 
-  (require 'clojure-mode)
+;;   (require 'clojure-mode)
 
-  (require 'swank-clojure)
+;;   (require 'swank-clojure)
 
-  (setq swank-clojure-jar-path "/usr/share/java/clojure.jar"
-	swank-clojure-extra-classpaths (list
-					"~/.emacs.d/swank-clojure/src/main/clojure"
-					"/usr/share/java/clojure-contrib.jar")))
+;;   (setq swank-clojure-jar-path "/usr/share/java/clojure.jar"
+;; 	swank-clojure-extra-classpaths (list
+;; 					"~/.emacs.d/swank-clojure/src/main/clojure"
+;; 					"/usr/share/java/clojure-contrib.jar")))
 
 ; Hyperspec stuff
 (when (or adam-is-linux adam-is-mac)	  
@@ -195,9 +195,13 @@
 ;(require 'css-mode)
 
 ; javascript stuff
-(load-file "~/.emacs.d/js2/js2.elc")
+(load-file "~/.emacs.d/js2-mode/js2-mode.el")
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+
+(load-file "~/.emacs.d/rjsx-mode/rjsx-mode.el")
+(add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode))
 
 ; org-mode stuff
 (when (or adam-is-linux adam-is-mac)
@@ -213,8 +217,8 @@
 (ido-mode t)
 
 ;; Rinari
-(add-to-list 'load-path "~/.emacs.d/rinari")
-(require 'rinari)
+;; (add-to-list 'load-path "~/.emacs.d/rinari")
+;; (require 'rinari)
 
 ;; nXhtml
 ;; nXhtml has a bug in in which diables latex mode, so 
@@ -345,17 +349,27 @@
 ; htmlfontify
 (load-file "~/.emacs.d/htmlfontify/htmlfontify.el")
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(org-agenda-files (quote ("~/research/phd.org")))
- '(safe-local-variable-values (quote ((eval rename-buffer "gallery init.pp") (eval rename-buffer "mysql init.pp") (eval rename-buffer "bash init.pp") (ruby-compilation-executable . "ruby") (ruby-compilation-executable . "ruby1.8") (ruby-compilation-executable . "ruby1.9") (ruby-compilation-executable . "rbx") (ruby-compilation-executable . "jruby")))))
+ '(safe-local-variable-values
+   (quote
+	((auto-fill-mode)
+	 (eval rename-buffer "gallery init.pp")
+	 (eval rename-buffer "mysql init.pp")
+	 (eval rename-buffer "bash init.pp")
+	 (ruby-compilation-executable . "ruby")
+	 (ruby-compilation-executable . "ruby1.8")
+	 (ruby-compilation-executable . "ruby1.9")
+	 (ruby-compilation-executable . "rbx")
+	 (ruby-compilation-executable . "jruby")))))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
 ; markdown mode
@@ -466,11 +480,11 @@ All permutations equally likely."
 (require 'synonyms)
 
 ; add minor modes to latex mode
+(defvar-local adam-use-latex-auto-fill t "Should we use auto-fill mode when editing LaTex?")
 (add-hook 'latex-mode-hook 
-	  (lambda () 
-	    (auto-fill-mode t)
-	    (setq ispell-parser 'tex)
-	    (flyspell-mode t)))
+		  (lambda ()
+			(setq ispell-parser 'tex)
+			(flyspell-mode t)))
 
 ; have latex mode be the default when opening a .tex file
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . latex-mode))
@@ -488,7 +502,7 @@ All permutations equally likely."
 	      auto-mode-alist))
 
 ; graphviz-dot-mode
-(load-file "~/.emacs.d/graphviz-dot-mode.el") 
+(load-file "~/.emacs.d/graphviz-dot-mode/graphviz-dot-mode.el") 
 ; markdown-mode  
 
 ; enable eval in local variables
@@ -610,10 +624,10 @@ This works on the current region."
 
 ;; Want to get auto fill mode and flyspell when emailing
 (add-hook 'mail-mode-hook
-	  (lambda () 
-	    (auto-fill-mode t)
-	    (flyspell-mode t)
-		(mail-text)))
+		  (lambda ()
+;;			(set-visual-wrap-column 80)
+			(flyspell-mode t)
+			(mail-text)))
 
 ;; Want to change font based on quoted level
 (add-hook 'mail-mode-hook
@@ -624,5 +638,16 @@ This works on the current region."
 									  ("^[ \t]*>[ \t]*>.*$"
 									   (0 'mail-double-quoted-text-face))))))
 
+; yasnippet stuff
+(add-to-list 'load-path
+			 "~/.emacs.d/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(defun my-set-to-and-subject-for-pwndevil-email ()
+  (interactive)
+  (save-excursion
+	(mail-subject)
+	(insert (concat "Meeting " (format-time-string "%-m/%-e") " 4pm--6pm BYENG 420"))))
 
 
